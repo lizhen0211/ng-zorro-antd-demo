@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  TEST_URL: 'https://apollo-d.uucin.com',
 };
