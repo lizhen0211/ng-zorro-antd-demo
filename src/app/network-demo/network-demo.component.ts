@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {DemoReqService} from '../request/demo-req.service';
 import HttpResErrorPaser, {EntityErrorPaser} from '../http/error/HttpResErrorPaser';
 import HttpError from '../http/error/HttpError';
+import {Park} from '../biz/bo/Park';
+import HttpResponseUtil from '../http/HttpResponseUtil';
 
 @Component({
   selector: 'app-network-demo',
@@ -18,7 +20,18 @@ export class NetworkDemoComponent implements OnInit {
 
   public onGetRequestClick(): void {
     this.demoReqService.getRequest().subscribe((res) => {
-      console.log(res);
+      // @ts-ignore
+      let parks1: Array<Park> = res;
+      console.log(parks1);
+      for (let park of parks1) {
+        console.log(park.address);
+        console.log(park.rt);
+        console.log(park.rt.total);
+      }
+
+      // @ts-ignore
+      let parks: Array<Park> = HttpResponseUtil.parseJSONArray(Park, res);
+      console.log(parks);
     }, (err) => {
       console.log(err);
     });
