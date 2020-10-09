@@ -4,6 +4,7 @@ import HttpResErrorPaser, {EntityErrorPaser} from '../http/error/HttpResErrorPas
 import HttpError from '../http/error/HttpError';
 import {Park} from '../biz/bo/Park';
 import HttpResponseUtil from '../http/HttpResponseUtil';
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-network-demo',
@@ -19,22 +20,25 @@ export class NetworkDemoComponent implements OnInit {
   }
 
   public onGetRequestClick(): void {
-    this.demoReqService.getRequest().subscribe((res) => {
+    this.demoReqService.getTestUrlResponse().subscribe((res: HttpResponse<any>) => {
+      console.log(res);
+      console.log(res.headers.get('date'));
+      console.log(HttpResponseUtil.getHeaderDate(res));
+      console.log(HttpResponseUtil.getHeaderLink(res));
+
       // @ts-ignore
-      let parks1: Array<Park> = res;
+      let parks1: Array<Park> = res.body;
       console.log(parks1);
-      for (let park of parks1) {
-        console.log(park.address);
-        console.log(park.rt);
-        console.log(park.rt.total);
-      }
+      console.log(parks1[0].address);
+      console.log(parks1[0].rt);
+      console.log(parks1[0].total);
 
       // @ts-ignore
       let parks: Array<Park> = HttpResponseUtil.parseJSONArray(Park, res);
       console.log(parks);
-    }, (err) => {
-      console.log(err);
-    });
+    }, ((error) => {
+      console.log(error);
+    }));
   }
 
   public onPostRequestClick(): void {

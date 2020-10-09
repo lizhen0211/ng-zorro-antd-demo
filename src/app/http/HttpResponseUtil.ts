@@ -1,5 +1,6 @@
 import {plainToClass} from 'class-transformer';
 import {ClassType} from 'class-transformer/ClassTransformer';
+import {HttpResponse} from '@angular/common/http';
 
 export default class HttpResponseUtil {
 
@@ -23,7 +24,7 @@ export default class HttpResponseUtil {
     return clsObjs;
   }
 
-  public static getHeaderLink(linkStr: string): string {
+  private static getHeaderLink1(linkStr: string): string {
     let result: string = '';
     if (linkStr) {
       result = linkStr.split('>')[0].split('<')[1];
@@ -31,5 +32,19 @@ export default class HttpResponseUtil {
     return result;
   }
 
+  /**
+   * 获取link url
+   * @param response
+   */
+  public static getHeaderLink(response: HttpResponse<any>): string {
+    return HttpResponseUtil.getHeaderLink1(response.headers.get('link'));
+  }
 
+  /**
+   * 获取日期
+   * @param response
+   */
+  public static getHeaderDate(response: HttpResponse<any>): Date {
+    return new Date(response.headers.get('date'));
+  }
 }
