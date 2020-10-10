@@ -13,6 +13,7 @@ import zh from '@angular/common/locales/zh';
 import initializer from './initialize/initializer';
 import { MenuComponent } from './menu/menu.component';
 import { NetworkDemoComponent } from './network-demo/network-demo.component';
+import { SlideComponent } from './slide/slide.component';
 
 registerLocaleData(zh);
 
@@ -21,6 +22,7 @@ registerLocaleData(zh);
     AppComponent,
     MenuComponent,
     NetworkDemoComponent,
+    SlideComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,7 @@ registerLocaleData(zh);
     {provide: PLATFORM_INITIALIZER, useFactory: initializer.platformInitialized, multi: true},
     {provide: APP_INITIALIZER, useFactory: initializer.delayBootstrapping, multi: true},
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [SlideComponent]
 })
 export class AppModule {
 }
