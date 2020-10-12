@@ -11,9 +11,9 @@ import {zh_CN} from 'ng-zorro-antd/i18n';
 import {registerLocaleData} from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import initializer from './initialize/initializer';
-import { MenuComponent } from './menu/menu.component';
-import { NetworkDemoComponent } from './network-demo/network-demo.component';
-import { SlideComponent } from './slide/slide.component';
+import {MenuComponent} from './menu/menu.component';
+import {NetworkDemoComponent} from './network-demo/network-demo.component';
+import {SlideComponent} from './slide/slide.component';
 
 registerLocaleData(zh);
 
@@ -22,7 +22,7 @@ registerLocaleData(zh);
     AppComponent,
     MenuComponent,
     NetworkDemoComponent,
-    SlideComponent,
+    SlideComponent
   ],
   imports: [
     BrowserModule,
