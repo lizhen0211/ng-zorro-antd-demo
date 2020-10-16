@@ -14,6 +14,15 @@ export class SlideComponent implements OnInit {
     this.initMenuDatas();
   }
 
+  public onMenuItemClick(item: MenuItem, index: number): void {
+    console.log(item);
+    console.log(index);
+  }
+
+  public onSubMenuClick(item: SubMenu, index: number): void {
+    console.log(item);
+  }
+
   public menuItems: Array<MenuItem> = [];
 
   public initMenuDatas(): void {
