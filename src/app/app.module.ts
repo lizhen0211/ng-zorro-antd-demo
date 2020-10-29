@@ -14,6 +14,8 @@ import initializer from './initialize/initializer';
 import {MenuComponent} from './menu/menu.component';
 import {NetworkDemoComponent} from './network-demo/network-demo.component';
 import {SlideComponent} from './slide/slide.component';
+import {EchartDemoComponent} from './echart-demo/echart-demo.component';
+import {NgxEchartsModule} from 'ngx-echarts';
 
 registerLocaleData(zh);
 
@@ -22,14 +24,23 @@ registerLocaleData(zh);
     AppComponent,
     MenuComponent,
     NetworkDemoComponent,
-    SlideComponent
+    SlideComponent,
+    EchartDemoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxEchartsModule.forRoot({
+      /**
+       * This will import all modules from echarts.
+       * If you only need custom modules,
+       * please refer to [Custom Build] section.
+       */
+      echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
+    }),
   ],
   providers: [
     {provide: NZ_I18N, useValue: zh_CN},
@@ -37,7 +48,7 @@ registerLocaleData(zh);
     {provide: PLATFORM_INITIALIZER, useFactory: initializer.platformInitialized, multi: true},
     {provide: APP_INITIALIZER, useFactory: initializer.delayBootstrapping, multi: true},
   ],
-  bootstrap: [SlideComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
